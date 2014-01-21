@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace Teamr
 {
     public enum EventType { Game, Practice };
+    
+    public enum Availability { NotAvailable = 0, Available = 1, MaybeAvailable = 2 };
 
     public class TeamNet
     {
