@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Teamr
+namespace TeamNet
 {
     public enum EventType { Game, Practice };
     
