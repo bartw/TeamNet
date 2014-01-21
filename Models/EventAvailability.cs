@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Teamr.Models
+namespace TeamNet.Models
 {
     [DataContract]
     public class EventAvailability
