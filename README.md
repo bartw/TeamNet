@@ -19,30 +19,23 @@ instance.Initialize(token);
 //Get a list of the teams you have access to.
 var teams = await instance.GetTeams();
 
-foreach (var team in teams)
-{
-  //Get YOUR rosters in a team.
-  var yourRosters = await instance.GetAvailableRosters(team.Id);
+//Get YOUR rosters in a team.
+var yourRosters = await instance.GetAvailableRosters(TEAM_ID);
 
-  foreach (var roster in yourRosters)
-  {
-    //Get all the rosters for this roster in a team
-    var rosters = await instance.GetTeamRosters(team.Id, roster.Id);
-    //Get the games for this roster in this team.
-    var games = await instance.GetGames(team.Id, roster.Id);
-    //Get the practices for this roster in this team.
-    var practices = await instance.GetPractices(team.Id, roster.Id);
+//Get all the rosters (that your roster can see) in a team
+var rosters = await instance.GetTeamRosters(TEAM_ID, AS_ROSTER_ID);
 
-    foreach (var game in games)
-    {
-      //Get availability
-      var availabilities = instance.GetEventAvailabilities(team.Id, roster.Id, game.Id, EventType.Game);
-    }
+//Get the games (that your roster can see) in this team.
+var games = await instance.GetGames(TEAM_ID, AS_ROSTER_ID);
+    
+//Get the practices (that your roster can see) in this team.
+var practices = await instance.GetPractices(TEAM_ID, AS_ROSTER_ID);
 
-    foreach (var practice in practices)
-    {
-      //Get availability
-      var availabilities = instance.GetEventAvailabilities(team.Id, roster.Id, practice.Id, EventType.Practice);
-    }
-  }
-}
+//Get the availabilities for an event
+var availabilities = instance.GetEventAvailabilities(TEAM_ID, AS_ROSTER_ID, EVENT_ID, EventType.Practice);
+var availabilities = instance.GetEventAvailabilities(TEAM_ID, AS_ROSTER_ID, EVENT_ID, EventType.Game);
+
+//Update availability for a roster member
+instance.SetAvailability(TEAM_ID, AS_ROSTER_ID, EVENT_ID, ROSTER_ID, Availability.NotAvailable);
+instance.SetAvailability(TEAM_ID, AS_ROSTER_ID, EVENT_ID, ROSTER_ID, Availability.Available);
+instance.SetAvailability(TEAM_ID, AS_ROSTER_ID, EVENT_ID, ROSTER_ID, Availability.MaybeAvailable);
