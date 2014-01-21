@@ -194,6 +194,14 @@ namespace Teamr
 
             return null;
         }
+        
+        public async void SetAvailability(int teamId, int asRosterId, int eventId, int rosterId, Availability availability)
+        {
+            var content = new StringContent(string.Format("{{\"availability\": {{\"status\": {0}}}}}", (int)availability), Encoding.UTF8, "application/json");
+            var response = await _client.PutAsync(string.Format("{0}/teams/{1}/as_roster/{2}/events/{3}/availabilities/{4}", _apiBase, teamId, asRosterId, eventId, rosterId), content);
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+        }
 
         private static T Deserialize<T>(string json)
         {
